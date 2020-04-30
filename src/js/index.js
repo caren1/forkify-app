@@ -24,7 +24,7 @@ const controlSearch = async () => {
         await state.search.getResults();
 
         // 5) - render results on the UI ; only after received a results from API
-        console.log(state.search.result);
+        searchView.renderResults(state.search.results);
 
 
     }
