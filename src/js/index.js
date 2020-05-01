@@ -23,15 +23,12 @@ const controlSearch = async () => {
         searchView.clearResults();
         renderLoader(elements.searchRes);
 
-
         // 4) - search for a recipes
         await state.search.getResults();
 
         // 5) - render results on the UI ; only after received a results from API
         clearLoader();
         searchView.renderResults(state.search.results);
-
-
     }
 }
 
