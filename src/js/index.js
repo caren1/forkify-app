@@ -79,9 +79,11 @@ const controlRecipe = async () => {
         // create new recipe object
         state.recipe = new Recipe(id);
 
-        try {
-            // get the recipe data
+        // try {
+            // get the recipe data and parse ingredients
             await state.recipe.getRecipe();
+
+            state.recipe.parseIngredients();
 
             // calculate time and calculate servings
             state.recipe.calcTime();
@@ -89,11 +91,12 @@ const controlRecipe = async () => {
 
             // render recipe
             console.log(state.recipe);
-
-        } catch (error) {
-            alert("error procesing recipe.");
         }
+
+        // } catch (error) {
+        //     // alert("error procesing recipe.");
+        // }
     }
-}
+// }
 
 ['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
