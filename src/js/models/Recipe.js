@@ -31,10 +31,10 @@ export default class Recipe {
         // array of ingredients
         const numIng = this.ingredients.length;
         const periods = Math.ceil(numIng / 3);
-        this.time = period * 15;
+        this.time = periods * 15;
     }
 
-    calcServigs() {
+    calcServings() {
         this.servings = 4;
     }
 }
