@@ -18,7 +18,7 @@ export const highlightSelected = (id) => {
     resultsArr.forEach(el => {
         el.classList.remove('results__link--active');
     });
-    document.querySelector(`a[href="#${id}"]`).classList.add('results__link--active');
+    document.querySelector(`.results__link[href="#${id}"]`).classList.add('results__link--active');
 };
 
 /*
@@ -30,7 +30,7 @@ acc: 15 / acc + cur.length - 18 / newTitle = ['Pasta', 'with', 'tomato'];
 acc: 18 / acc + cur.length - 24 / newTitle = ['Pasta', 'with', 'tomato'];
 */
 
-const limitRecipeTitlte = (title, limit = 17) => {
+export const limitRecipeTitle = (title, limit = 17) => {
     const newTitle = [];
     if (title.length > limit) {
         title.split(' ').reduce((acc, cur) => {
@@ -50,7 +50,7 @@ const renderRecipe = recipe => {
     <li>
         <a class="results__link" href="#${recipe.recipe_id}">
             <figure class="results__fig">
-                <img src="${recipe.image_url}" alt="${limitRecipeTitlte(recipe.title)}">
+                <img src="${recipe.image_url}" alt="${limitRecipeTitle(recipe.title)}">
             </figure>
             <div class="results__data">
                 <h4 class="results__name">${recipe.title}</h4>
