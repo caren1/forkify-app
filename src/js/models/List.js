@@ -19,7 +19,6 @@ export default class List {
     }
 
     deleteItem (id) {
-
         const index = this.items.findIndex(el => el.id === id)
 
         /* what does splice do? -> we pass in a start index and then how many positions we want to take, and then returns

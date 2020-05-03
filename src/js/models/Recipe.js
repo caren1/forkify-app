@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-
 // each recipe will be identified with an ID
 // later on will use it on AJAX call to get more data
 export default class Recipe {
@@ -45,7 +44,6 @@ export default class Recipe {
         const units = [...unitsShort, 'kg', 'g'];
         //              ^ - destructuring ES6
 
-
         const newIngredients = this.ingredients.map(el => {
             // 1) uniform units
 
@@ -58,10 +56,10 @@ export default class Recipe {
             ingredient = ingredient.replace(/ *\([^)]*\) */g, ' ');
 
             // 3) parse ingredients into count, unit and ingredient
-            // 1 - if there is actually a unit in the string if so, where it is located
-            const arrIng = ingredient.split(' ');
-            // for each element it will test if that element is inside unitsShort array -> will return an index when this test will return true
-            const unitIndex = arrIng.findIndex(el2 => units.includes(el2));
+             // 1 - if there is actually a unit in the string if so, where it is located
+                const arrIng = ingredient.split(' ');
+             // for each element it will test if that element is inside unitsShort array -> will return an index when this test will return true
+                const unitIndex = arrIng.findIndex(el2 => units.includes(el2));
 
             let objIng;
             if (unitIndex > -1) {

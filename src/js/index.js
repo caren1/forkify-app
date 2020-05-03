@@ -2,6 +2,7 @@ import Search from './models/Search';
 import Recipe from './models/Recipe';
 import List from './models/List';
 import Likes from './models/Likes';
+
 import * as searchView from './views/searchView';
 import * as recipeView from './views/recipeView';
 import * as listView from './views/listView';
@@ -27,6 +28,7 @@ const controlSearch = async () => {
     // 1) - getting a query from the view
     const query = searchView.getInput(); // TODO taken from searchView
     if (query) {
+
         // 2) - creating new search object and add to state
         state.search = new Search(query);
 
@@ -44,9 +46,7 @@ const controlSearch = async () => {
             searchView.renderResults(state.search.results);
 
         } catch (error) {
-            // alert("something wrong with the search");
-            console.log(error);
-            
+            alert("something wrong with the search");
             clearLoader();
         }
 
@@ -57,7 +57,6 @@ elements.searchForm.addEventListener('submit', e => {
     e.preventDefault();
     controlSearch();
 });
-
 
 // event delegation with parent element and .closest method
 elements.searchResPages.addEventListener('click', e => {
@@ -70,15 +69,13 @@ elements.searchResPages.addEventListener('click', e => {
     }
 });
 
-
-/* Recipe Controller */
+/* RECIPE CONTROLLER */
 
 const controlRecipe = async () => {
     // getting the ID hash from URL
     // entire url -> window.location
     // only hash -> window.location.hash
     const id = window.location.hash.replace('#', '');
-    // console.log(id);
 
     if (id) {
 
@@ -117,7 +114,7 @@ const controlRecipe = async () => {
 ['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
 
 
-/* List controller */
+/* LIST CONTROLLER */
 
 const controlList = () => {
     // create a new list if there is none yet
@@ -148,12 +145,14 @@ elements.shopping.addEventListener('click', e => {
 })
 
 
-/* Like controller */
+/* LIKE CONTROLLER */
+
 state.likes = new Likes();
 likesView.toggleLikeMenu(state.likes.getNumLikes());
 const controlLike = () => {
     if (!state.likes) state.likes = new Likes();
     const currentID = state.recipe.id;
+
     // user has not yet liked current recipe
     if (!state.likes.isLiked(currentID)) {
         // 1 - add like to the state
@@ -188,7 +187,7 @@ const controlLike = () => {
 // Restoring the liked recipes on page load
 window.addEventListener('load', () => {
     state.likes = new Likes();
-    
+
     // restore likes
     state.likes.readStorage();
 

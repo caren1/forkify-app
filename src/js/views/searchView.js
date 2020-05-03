@@ -101,7 +101,6 @@ export const renderResults = (recipes, page = 1, resPerPage = 10) => {
     // array of 30 recipes, of which we can take only a part of
     const newArray = recipes.slice(start, end);
     newArray.forEach(renderRecipe);
-    // recipes.slice(start, end).forEach(renderRecipe);
 
     // render pagination buttons 
     renderButtons(page, recipes.length, resPerPage);

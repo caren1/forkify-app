@@ -1,5 +1,4 @@
 import {
-    element,
     elements
 } from './base';
 
