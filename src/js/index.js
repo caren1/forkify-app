@@ -1,5 +1,6 @@
 import Search from './models/Search';
 import Recipe from './models/Recipe';
+import List from './models/List';
 import * as searchView from './views/searchView';
 import * as recipeView from './views/recipeView';
 import {
@@ -71,7 +72,7 @@ const controlRecipe = async () => {
             // entire url -> window.location
             // only hash -> window.location.hash
             const id = window.location.hash.replace('#', '');
-            console.log(id);
+            // console.log(id);
 
             if (id) {
 
