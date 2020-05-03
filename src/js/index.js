@@ -185,6 +185,19 @@ const controlLike = () => {
     likesView.toggleLikeMenu(state.likes.getNumLikes());
 };
 
+// Restoring the liked recipes on page load
+window.addEventListener('load', () => {
+    state.likes = new Likes();
+    
+    // restore likes
+    state.likes.readStorage();
+
+    // toggle like menu button ; if any likes button will be displayed
+    likesView.toggleLikeMenu(state.likes.getNumLikes());
+
+    // render the existing likes into the menu
+    state.likes.likes.forEach(like => likesView.renderLike(like));
+});
 
 
 /* we use event delegation, becasue buttons is not yet on the page
