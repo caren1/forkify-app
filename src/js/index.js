@@ -104,4 +104,26 @@ const controlRecipe = async () => {
             }
         }
 
-            ['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
+['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
+
+/* we use event delegation, becasue buttons is not yet on the page
+ there is only recipe present, so thats where we'll attach an eventlistener 
+ then use the .target property of an event in order to figure out where the click happened */
+/* handling recipe button clicks */
+
+elements.recipe.addEventListener('click', e => {
+    
+    if(e.target.matches('.btn-decrease, .btn-decrease *')){
+        // decrease button is clicked
+        if(state.recipe.servings > 1){
+            state.recipe.updateServings('dec');
+            recipeView.updateServingsIngredients(state.recipe);
+        }
+    } else if(e.target.matches('.btn-increase, .btn-increase *')){
+        // increase button is clicked
+        state.recipe.updateServings('inc');
+        recipeView.updateServingsIngredients(state.recipe);
+    }
+});
+
+
