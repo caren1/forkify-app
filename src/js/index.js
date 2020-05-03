@@ -1,6 +1,7 @@
 import Search from './models/Search';
 import Recipe from './models/Recipe';
 import * as searchView from './views/searchView';
+import * as recipeView from './views/recipeView';
 import {
     elements,
     renderLoader,
@@ -37,7 +38,7 @@ const controlSearch = async () => {
             clearLoader();
             searchView.renderResults(state.search.results);
 
-        }catch(error){
+        } catch (error) {
             alert("something wrong with the search");
             clearLoader();
         }
@@ -66,37 +67,37 @@ elements.searchResPages.addEventListener('click', e => {
 /* Recipe Controller */
 
 const controlRecipe = async () => {
-    // getting the ID hash from URL
-    // entire url -> window.location
-    // only hash -> window.location.hash
-    const id = window.location.hash.replace('#', '');
-    console.log(id);
+            // getting the ID hash from URL
+            // entire url -> window.location
+            // only hash -> window.location.hash
+            const id = window.location.hash.replace('#', '');
+            console.log(id);
 
-    if (id) {
+            if (id) {
 
-        // prepare the UI for changes
+                // prepare the UI for changes
+                renderLoader(elements.recipe);
+                recipeView.clearRecipe();
+                // create new recipe object
+                state.recipe = new Recipe(id);
 
-        // create new recipe object
-        state.recipe = new Recipe(id);
+                try {
+                    // get the recipe data and parse ingredients
+                    await state.recipe.getRecipe();
+                    state.recipe.parseIngredients();
 
-        // try {
-            // get the recipe data and parse ingredients
-            await state.recipe.getRecipe();
+                    // calculate time and calculate servings
+                    state.recipe.calcTime();
+                    state.recipe.calcServings();
 
-            state.recipe.parseIngredients();
+                    // render recipe
+                    clearLoader();
+                    recipeView.renderRecipe(state.recipe);
 
-            // calculate time and calculate servings
-            state.recipe.calcTime();
-            state.recipe.calcServings();
-
-            // render recipe
-            console.log(state.recipe);
+                } catch (error) {
+                    // alert("error procesing recipe.");
+                }
+            }
         }
 
-        // } catch (error) {
-        //     // alert("error procesing recipe.");
-        // }
-    }
-// }
-
-['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
+            ['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
